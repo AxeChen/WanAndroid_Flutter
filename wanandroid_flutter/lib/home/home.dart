@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid_flutter/bean/ArticleBean.dart';
 import 'package:wanandroid_flutter/network/DioClient.dart';
+import 'package:wanandroid_flutter/web/WebViewPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -139,145 +140,158 @@ class _HomePageState extends State<HomePage> {
     TextStyle textStyle = TextStyle(fontSize: 12, color: Colors.grey);
     if (index < articleList.length) {
       var articleBean = articleList[index];
-      return Card(
-        elevation: 0.5,
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                  margin:
-                      EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: <Widget>[
-                      ClipOval(
-                        child: SizedBox(
-                          width: 30,
-                          height: 30,
-                          child: Image.network(
-                            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3018968254,2801372361&fm=26&gp=0.jpg",
-                            width: 30,
-                            height: 30,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 10),
-                        child: Text(articleBean.author),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Offstage(
-                              offstage:
-                                  (articleBean.fresh == true) ? false : true,
-                              child: Container(
-                                padding: EdgeInsets.all(3),
-                                child: Text(
-                                  "最新",
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.redAccent),
-                                ),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.redAccent, width: 0.5),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(4))),
-                                margin: EdgeInsets.all(3),
+      return GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WebViewPage(
+                        url: articleBean.link, title: articleBean.title,hideAppbar: false,)));
+          },
+          child: Card(
+            elevation: 0.5,
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.only(
+                          left: 10, top: 10, right: 10, bottom: 10),
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: <Widget>[
+                          ClipOval(
+                            child: SizedBox(
+                              width: 30,
+                              height: 30,
+                              child: Image.network(
+                                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3018968254,2801372361&fm=26&gp=0.jpg",
+                                width: 30,
+                                height: 30,
                               ),
                             ),
-                            Offstage(
-                                offstage: true,
-                                child: Container(
-                                  padding: EdgeInsets.all(3),
-                                  child: Text("置顶",
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: Text(articleBean.author),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Offstage(
+                                  offstage: (articleBean.fresh == true)
+                                      ? false
+                                      : true,
+                                  child: Container(
+                                    padding: EdgeInsets.all(3),
+                                    child: Text(
+                                      "最新",
                                       style: TextStyle(
                                           fontSize: 10,
-                                          color: Colors.redAccent)),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.redAccent, width: 0.5),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4))),
-                                  margin: EdgeInsets.all(3),
-                                )),
-                            Offstage(
-                                offstage: (articleBean.projectLink == null)
-                                    ? false
-                                    : true,
-                                child: Container(
-                                  padding: EdgeInsets.all(3),
-                                  child: Text("项目",
-                                      style: TextStyle(
-                                          fontSize: 10, color: Colors.green)),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.green, width: 0.5),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4))),
-                                  margin: EdgeInsets.all(3),
-                                )),
-                            Container(
-                              child: Icon(
-                                Icons.favorite,
-                                color: (articleBean.collect)
-                                    ? Colors.blue
-                                    : Colors.grey,
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  )),
-              Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  articleBean.title,
-                  maxLines: 2,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Container(
-                margin:
-                    EdgeInsets.only(left: 10, right: 16, bottom: 10, top: 10),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      "分类：",
-                      style: textStyle,
-                    ),
-                    Text(
-                      "${articleBean.superChapterName}/${articleBean.chapterName}",
-                      style: textStyle,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            "时间：",
-                            style: textStyle,
-                          ),
-                          Text(
-                            "1小时前",
-                            style: textStyle,
-                          ),
+                                          color: Colors.redAccent),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.redAccent,
+                                            width: 0.5),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4))),
+                                    margin: EdgeInsets.all(3),
+                                  ),
+                                ),
+                                Offstage(
+                                    offstage: true,
+                                    child: Container(
+                                      padding: EdgeInsets.all(3),
+                                      child: Text("置顶",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.redAccent)),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.redAccent,
+                                              width: 0.5),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(4))),
+                                      margin: EdgeInsets.all(3),
+                                    )),
+                                Offstage(
+                                    offstage: (articleBean.projectLink == null)
+                                        ? false
+                                        : true,
+                                    child: Container(
+                                      padding: EdgeInsets.all(3),
+                                      child: Text("项目",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.green)),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.green, width: 0.5),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(4))),
+                                      margin: EdgeInsets.all(3),
+                                    )),
+                                Container(
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: (articleBean.collect)
+                                        ? Colors.blue
+                                        : Colors.grey,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      );
+                      )),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      articleBean.title,
+                      maxLines: 2,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: 10, right: 16, bottom: 10, top: 10),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          "分类：",
+                          style: textStyle,
+                        ),
+                        Text(
+                          "${articleBean.superChapterName}/${articleBean.chapterName}",
+                          style: textStyle,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Text(
+                                "时间：",
+                                style: textStyle,
+                              ),
+                              Text(
+                                "1小时前",
+                                style: textStyle,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ));
     } else if (showMore) {
       return _getLoadItem(context, index);
     } else {
@@ -301,11 +315,7 @@ class _HomePageState extends State<HomePage> {
                   strokeWidth: 3,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 10),
-                child: Text("正在加载")
-              ),
-
+              Container(margin: EdgeInsets.only(left: 10), child: Text("正在加载")),
             ],
           )),
     );
