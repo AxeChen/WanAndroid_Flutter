@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wanandroid_flutter/web/WebViewPage.dart';
 
 class UserPage extends StatefulWidget {
   @override
@@ -67,11 +68,10 @@ class _UserPageState extends State<UserPage> {
           ],
         ),
         Container(
-          decoration: BoxDecoration(color:Colors.white),
-          padding: EdgeInsets.only(left: 16,right: 16),
-          margin: EdgeInsets.only(top: 16,bottom: 16),
+          decoration: BoxDecoration(color: Colors.white),
+          padding: EdgeInsets.only(left: 16, right: 16),
+          margin: EdgeInsets.only(top: 16, bottom: 16),
           height: 55,
-
           child: Row(
             children: <Widget>[
               Icon(
@@ -89,9 +89,9 @@ class _UserPageState extends State<UserPage> {
           ),
         ),
         Container(
-          decoration: BoxDecoration(color:Colors.white),
+          decoration: BoxDecoration(color: Colors.white),
           height: 50,
-          padding: EdgeInsets.only(left: 16,right: 16),
+          padding: EdgeInsets.only(left: 16, right: 16),
           margin: EdgeInsets.only(top: 1),
           child: Row(
             children: <Widget>[
@@ -109,32 +109,40 @@ class _UserPageState extends State<UserPage> {
             ],
           ),
         ),
-        Container(
-          decoration: BoxDecoration(color:Colors.white),
-          height: 50,
-          padding: EdgeInsets.only(left: 16,right: 16),
-          margin: EdgeInsets.only(top: 1),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.library_books,
-                color: Colors.blue,
-                size: 25,
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "Flutter中文网",
-                    style: TextStyle(fontSize: 16),
-                  )),
-            ],
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WebViewPage(
+                      url: "https://flutterchina.club/", title: "flutter中文网",hideAppbar: false,)));
+          },
+          child: Container(
+            decoration: BoxDecoration(color: Colors.white),
+            height: 50,
+            padding: EdgeInsets.only(left: 16, right: 16),
+            margin: EdgeInsets.only(top: 1),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.library_books,
+                  color: Colors.blue,
+                  size: 25,
+                ),
+                Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Flutter中文网",
+                      style: TextStyle(fontSize: 16),
+                    )),
+              ],
+            ),
           ),
         ),
-
         Container(
-          decoration: BoxDecoration(color:Colors.white),
+          decoration: BoxDecoration(color: Colors.white),
           height: 50,
-          padding: EdgeInsets.only(left: 16,right: 16),
+          padding: EdgeInsets.only(left: 16, right: 16),
           margin: EdgeInsets.only(top: 1),
           child: Row(
             children: <Widget>[
@@ -152,50 +160,67 @@ class _UserPageState extends State<UserPage> {
             ],
           ),
         ),
-
-        Container(
-          decoration: BoxDecoration(color:Colors.white),
-          height: 50,
-          padding: EdgeInsets.only(left: 16,right: 16),
-          margin: EdgeInsets.only(top: 1),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.android,
-                color: Colors.blue,
-                size: 25,
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "Kotlin版本",
-                    style: TextStyle(fontSize: 16),
-                  )),
-            ],
+        GestureDetector(
+          onTap: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WebViewPage(
+                      url: "https://www.coolapk.com/apk/com.mg.axechen.wanandroid", title: "酷安",hideAppbar: false,)));
+          },
+          child:  Container(
+            decoration: BoxDecoration(color: Colors.white),
+            height: 50,
+            padding: EdgeInsets.only(left: 16, right: 16),
+            margin: EdgeInsets.only(top: 1),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.android,
+                  color: Colors.blue,
+                  size: 25,
+                ),
+                Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Kotlin版本",
+                      style: TextStyle(fontSize: 16),
+                    )),
+              ],
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WebViewPage(
+                      url: "https://github.com/AxeChen/WanAndroid_Flutter", title: "酷安",hideAppbar: false,)));
+          },
+          child: Container(
+            decoration: BoxDecoration(color: Colors.white),
+            height: 50,
+            padding: EdgeInsets.only(left: 16, right: 16),
+            margin: EdgeInsets.only(top: 1),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.library_books,
+                  color: Colors.blue,
+                  size: 25,
+                ),
+                Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "源码地址",
+                      style: TextStyle(fontSize: 16),
+                    )),
+              ],
+            ),
           ),
         ),
 
-        Container(
-          decoration: BoxDecoration(color:Colors.white),
-          height: 50,
-          padding: EdgeInsets.only(left: 16,right: 16),
-          margin: EdgeInsets.only(top: 1),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.library_books,
-                color: Colors.blue,
-                size: 25,
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "源码地址",
-                    style: TextStyle(fontSize: 16),
-                  )),
-            ],
-          ),
-        ),
       ],
     ));
   }
